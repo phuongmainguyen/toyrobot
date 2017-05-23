@@ -7,6 +7,7 @@ package toyrobotsimulator;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -14,13 +15,23 @@ import static org.junit.Assert.*;
  *
  * @author nmp
  */
-public class ToyRobotSimulatorTest {
+public class ToyRobotSimulatorTest 
+{
+    ToyRobotSimulator robot;
     
-    public ToyRobotSimulatorTest() {
+    public ToyRobotSimulatorTest() 
+    {
     }
     
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() 
+    {
+    }
+    
+    @Before
+    public void setUp()
+    {
+        robot = new ToyRobotSimulator();
     }
     
     @AfterClass
@@ -36,8 +47,24 @@ public class ToyRobotSimulatorTest {
     {
         System.out.println("whenCommandIsEmptyThenThrowException");
         
-        ToyRobotSimulator robot = new ToyRobotSimulator();
         robot.execute("");
+    }
+    
+    @Test(expected = RuntimeException.class)
+    public void whenCommandIsInvalidThenThrowException() 
+    {
+        System.out.println("whenCommandIsInvalidThenThrowException");
+        
+        robot.execute("turn");  // Valid commands: place, move, left, right, report
+    }
+    
+    @Test
+    public void whenCommandIsValidThenNoExceptionIsThrown() 
+    {
+        System.out.println("whenCommandIsValidThenNoExceptionIsThrown");
+        
+        robot.execute("right");  // Valid commands: place, move, left, right, report
+        assertTrue(true);
     }
     
 }
