@@ -111,4 +111,63 @@ public class PositionTest
         position.turn("right");
         assertEquals("2,3,NORTH", position.report());
     }
+    
+    /**
+     * Test of move method, of class Position.
+     */
+    @Test
+    public void whenMoveIsCalledBeforePlaceThenIgnore() 
+    {
+        System.out.println("whenMoveIsCalledBeforePlaceThenIgnore");
+        
+        position.move();
+        assertEquals("", position.report());
+    }
+    
+    /**
+     * Test of move method, of class Position.
+     */
+    @Test
+    public void whenMoveIsCalledAfterPlaceThenExecute() 
+    {
+        System.out.println("whenMoveIsCalledAfterPlaceThenExecute");
+        
+        position.place(2, 3, "WEST");
+        position.move();
+        assertEquals("1,3,WEST", position.report());
+    }
+    
+    /**
+     * Test of place method, of class Position.
+     */
+    @Test(expected = RuntimeException.class)
+    public void whenOrientationIsInvalidThenExceptionIsThrown() 
+    {
+        System.out.println("whenOrientationIsInvalidThenExceptionIsThrown");
+        
+        position.place(2, 3, "SOUTH EAST");
+    }
+    
+    /**
+     * Test of place method, of class Position.
+     */
+    @Test(expected = RuntimeException.class)
+    public void whenOrientationIsEmptyThenExceptionIsThrown() 
+    {
+        System.out.println("whenOrientationIsEmptyThenExceptionIsThrown");
+        
+        position.place(2, 3, "");
+    }
+    
+    /**
+     * Test of place method, of class Position.
+     */
+    @Test
+    public void whenArgsAreValidForPlaceThenExecute() 
+    {
+        System.out.println("whenArgsAreValidForPlaceThenExecute");
+        
+        position.place(2, 3, "WEST");
+        assertEquals("2,3,WEST", position.report());
+    }
 }

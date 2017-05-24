@@ -11,30 +11,66 @@ package toyrobotsimulator;
  */
 public class Position 
 {
-    private int posx;
-    private int posy;
+    private int posX;
+    private int posY;
     private Orientation orientation;
     
     public Position()
     {
         // Default of coordinates are -1 to identify whether the robot is on the table
-        posx = -1;
-        posy = -1;
+        posX = -1;
+        posY = -1;
         orientation = Orientation.EAST;
     }
     
+    /**
+     * This method sets the current position.
+     * 
+     * @param x the x-coordinate
+     * @param y the y-coordinate
+     * @param orient the orientation, e.g. NORTH, SOUTH, EAST or WEST
+     *
+     */
     public void place(int x, int y, String orient)
     {
-        posx = x;
-        posy = y;
-        orientation = Orientation.valueOf(orient);
+        try
+        {
+            orientation = Orientation.valueOf(orient);
+        }
+        catch (IllegalArgumentException | NullPointerException e)
+        {
+            throw new RuntimeException("Invalid orientation " + orient);
+        }
+        
+        posX = x;
+        posY = y;
     }
     
+    /**
+     * This method moves the current position one unit forward in the direction it is
+     * currently facing.
+     */
+    public void move()
+    {
+        if (posX != -1 && posY != -1 && orientation != null)
+        {
+            posX += orientation.getAddX();
+            posY += orientation.getAddY();
+        }
+    }
+    
+    /**
+     * This method turn the robot to left or right.
+     * E.g. left
+     * E.g. right
+     *
+     * @param leftOrRight a string representing either left or right
+     */
     public void turn(String leftOrRight)
     {
         int value = leftOrRight.equals("left") ? -1 : 1;
         
-        if (posx != -1 && posy != -1 && orientation != null)
+        if (posX != -1 && posY != -1 && orientation != null)
         {
             int number = (orientation.getValue() + value) % Orientation.values().length;
             orientation = orientation.getOrientation(number);
@@ -45,13 +81,14 @@ public class Position
      * This method reports the current position.
      * E.g. 0,0,WEST
      *
+     * @return A string representing the current position
      */
     public String report()
     {
         String strReport = "";
         
-        if (posx != -1 && posy != -1 && orientation != null)
-            strReport = String.format("%d,%d,%s", posx, posy, orientation);
+        if (posX != -1 && posY != -1 && orientation != null)
+            strReport = String.format("%d,%d,%s", posX, posY, orientation);
         
         return strReport;
     }
@@ -84,7 +121,7 @@ public class Position
             return addX;
         }
         
-        int getaddY()
+        int getAddY()
         {
             return addY;
         }
