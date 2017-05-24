@@ -20,7 +20,13 @@ public class Position
         // Default of coordinates are -1 to identify whether the robot is on the table
         posX = -1;
         posY = -1;
-        orientation = Orientation.EAST;
+    }
+    
+    public Position(int x, int y, Orientation orient)
+    {
+        posX = x;
+        posY = y;
+        orientation = orient;
     }
     
     /**
@@ -31,19 +37,11 @@ public class Position
      * @param orient the orientation, e.g. NORTH, SOUTH, EAST or WEST
      *
      */
-    public void place(int x, int y, String orient)
+    public void place(int x, int y, Orientation orient)
     {
-        try
-        {
-            orientation = Orientation.valueOf(orient);
-        }
-        catch (IllegalArgumentException | NullPointerException e)
-        {
-            throw new RuntimeException("Invalid orientation " + orient);
-        }
-        
         posX = x;
         posY = y;
+        orientation = orient;
     }
     
     /**
@@ -93,51 +91,34 @@ public class Position
         return strReport;
     }
     
-    private enum Orientation
+    public int getPosX()
     {
-        NORTH(1, 0, 1),
-        EAST(2, 1, 0),
-        SOUTH(3, 0, -1),
-        WEST(4, -1, 0);
-        
-        private int value;
-        private int addX;
-        private int addY;
-        
-        private Orientation(int val, int x, int y)
-        {
-            value = val;
-            addX = x;
-            addY = y;
-        }
-        
-        int getValue()
-        {
-            return value;
-        }
-        
-        int getAddX()
-        {
-            return addX;
-        }
-        
-        int getAddY()
-        {
-            return addY;
-        }
-        
-        Orientation getOrientation(int value)
-        {
-            Orientation[] orientations = Orientation.values();
-            
-            for(Orientation o : orientations)
-            {
-                if(o.getValue() == value)
-                    return o;
-            }
-            
-            return null;
-        }
+        return posX;
+    }
+    
+    public int getPosY()
+    {
+        return posY;
+    }
+    
+    public void setPosX(int value)
+    {
+        posX = value;
+    }
+    
+    public void setPosY(int value)
+    {
+        posY = value;
+    }
+    
+    public Orientation getOrientation()
+    {
+        return orientation;
+    }
+    
+    public void setOrientation(Orientation orient)
+    {
+        orientation = orient;
     }
     
 }

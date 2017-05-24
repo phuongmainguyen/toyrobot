@@ -58,7 +58,7 @@ public class PositionTest
     {
         System.out.println("whenReportIsCalledAfterePlaceThenExecute");
         
-        position.place(2, 3, "WEST");
+        position.place(2, 3, Orientation.WEST);
         assertEquals("2,3,WEST", position.report());
     }
     
@@ -82,7 +82,7 @@ public class PositionTest
     {
         System.out.println("whenTurnLeftIsCalledAfterValidPlaceThenExecute");
         
-        position.place(2, 3, "WEST");
+        position.place(2, 3, Orientation.WEST);
         position.turn("left");
         assertEquals("2,3,SOUTH", position.report());
     }
@@ -107,9 +107,9 @@ public class PositionTest
     {
         System.out.println("whenTurnRightIsCalledAfterValidPlaceThenExecute");
         
-        position.place(2, 3, "WEST");
+        position.place(2, 3, Orientation.EAST);
         position.turn("right");
-        assertEquals("2,3,NORTH", position.report());
+        assertEquals("2,3,SOUTH", position.report());
     }
     
     /**
@@ -132,31 +132,9 @@ public class PositionTest
     {
         System.out.println("whenMoveIsCalledAfterPlaceThenExecute");
         
-        position.place(2, 3, "WEST");
+        position.place(2, 3, Orientation.NORTH);
         position.move();
-        assertEquals("1,3,WEST", position.report());
-    }
-    
-    /**
-     * Test of place method, of class Position.
-     */
-    @Test(expected = RuntimeException.class)
-    public void whenOrientationIsInvalidThenExceptionIsThrown() 
-    {
-        System.out.println("whenOrientationIsInvalidThenExceptionIsThrown");
-        
-        position.place(2, 3, "SOUTH EAST");
-    }
-    
-    /**
-     * Test of place method, of class Position.
-     */
-    @Test(expected = RuntimeException.class)
-    public void whenOrientationIsEmptyThenExceptionIsThrown() 
-    {
-        System.out.println("whenOrientationIsEmptyThenExceptionIsThrown");
-        
-        position.place(2, 3, "");
+        assertEquals("2,4,NORTH", position.report());
     }
     
     /**
@@ -167,7 +145,8 @@ public class PositionTest
     {
         System.out.println("whenArgsAreValidForPlaceThenExecute");
         
-        position.place(2, 3, "WEST");
-        assertEquals("2,3,WEST", position.report());
+        position.place(2, 3, Orientation.NORTH);
+        assertEquals("2,3,NORTH", position.report());
     }
+    
 }
