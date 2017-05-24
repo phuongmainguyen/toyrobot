@@ -50,6 +50,9 @@ public class ToyRobotSimulatorTest
         robot.execute("");
     }
     
+    /**
+     * Test of whenCommandIsInvalidThenThrowException method, of class ToyRobotSimulator.
+     */
     @Test(expected = RuntimeException.class)
     public void whenCommandIsInvalidThenThrowException() 
     {
@@ -58,6 +61,9 @@ public class ToyRobotSimulatorTest
         robot.execute("turn");  // Valid commands: place, move, left, right, report
     }
     
+    /**
+     * Test of whenCommandIsValidThenNoExceptionIsThrown method, of class ToyRobotSimulator.
+     */
     @Test
     public void whenCommandIsValidThenNoExceptionIsThrown() 
     {
@@ -67,4 +73,15 @@ public class ToyRobotSimulatorTest
         assertTrue(true);
     }
     
+    /**
+     * Test of whenNoOfArgsIsLessThan3ThenIgnorePlace method, of class ToyRobotSimulator.
+     */
+    @Test
+    public void whenNoOfArgsIsLessThan3ThenIgnorePlace() 
+    {
+        System.out.println("whenNoOfArgsIsLessThan3ThenIgnorePlace");
+        
+        robot.execute("place 1,2");  // Valid commands: place, move, left, right, report
+        assertTrue(true);
+    }
 }

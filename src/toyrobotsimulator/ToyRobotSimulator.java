@@ -14,6 +14,11 @@ import java.lang.reflect.*;
 public class ToyRobotSimulator 
 {
     /**
+     * This method executes a line of command
+     * E.g. PLACE 0,0,NORTH
+     * E.g. LEFT
+     * E.g. REPORT
+     * 
      * @param cmd the command to be executed by the robot
      */
     public void execute(String cmd) 
