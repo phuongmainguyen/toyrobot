@@ -49,17 +49,26 @@ public class ToyRobotSimulator
         
         // Extract command by converting to lower case and split based on whitespace
         // action contains the command type, e.g. place, left
-        // args contains any arguments beside the command, e.g. 1,2,NORTH
         cmd = cmd.toLowerCase();
         String[] words = cmd.split("\\s", 2);
         String action = words[0];
-        String args = words.length > 1 ? words[1] : "";
         
         try
         {
             // Try to invoke the method of the command. If not valid method, throws Exception
-            Method method = this.getClass().getMethod(action, String.class);
-            method.invoke(this, args); // pass arg
+            if(action.equals("place"))
+            {
+                // args contains any arguments beside PLACE command, e.g. 1,2,NORTH
+                String args = words.length > 1 ? words[1] : "";
+        
+                Method method = this.getClass().getMethod(action, String.class);
+                method.invoke(this, args);
+            }
+            else
+            {
+                Method method = this.getClass().getMethod(action);
+                method.invoke(this);
+            }
         }
         catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e)
         {
@@ -130,10 +139,8 @@ public class ToyRobotSimulator
     
     /**
      * This method moves the robot one unit to the direction it is facing.
-     * 
-     * @param args a dummy argument
      */
-    public void move(String args)
+    public void move()
     {
         // If orientation is null, i.e. not set > PLACE not executed before then ignore move
         if (position.getOrientation() == null) 
@@ -149,30 +156,24 @@ public class ToyRobotSimulator
     
     /**
      * This method turns the robot to the left.
-     * 
-     * @param args a dummy argument
      */
-    public void left(String args)
+    public void left()
     {
         position.turn("left");
     }
     
     /**
      * This method turns the robot to the right.
-     * 
-     * @param args a dummy argument
      */
-    public void right(String args)
+    public void right()
     {
         position.turn("right");
     }
     
     /**
      * This method reports the current position of the robot.
-     * 
-     * @param args a dummy argument
      */
-    public void report(String args)
+    public void report()
     {
         String rep = position.report();
         
