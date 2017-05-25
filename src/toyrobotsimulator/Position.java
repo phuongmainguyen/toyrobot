@@ -1,12 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * [2017]
+ * All Rights Reserved.
+ * 
+ * NOTICE:  All information contained herein is, and remains
+ * the property of the original author. However, you are 
+ * free to use any part of it as long as the source is referred :) 
  */
 package toyrobotsimulator;
 
 /**
- *
+ * POSITION
+ * 
+ * The class Position contains the x and y coordinates and also the orientation
+ * NORTH, EAST, WEST and SOUTH.
+ * 
  * @author nmp
  */
 public class Position 
@@ -15,6 +22,10 @@ public class Position
     private int posY;
     private Orientation orientation;
     
+    /**
+     * Constructor which instantiates the Position class.
+     * 
+     */
     public Position()
     {
         // Default of coordinates are -1 to identify whether the robot is on the table
@@ -22,6 +33,14 @@ public class Position
         posY = -1;
     }
     
+    /**
+     * Constructor which instantiates the Position class
+     * with the specified x and y coordinates and orientation.
+     * 
+     * @param x the incremental unit for x coordinate
+     * @param y the incremental unit for y coordinate
+     * @param orient the orientation enum of the position
+     */
     public Position(int x, int y, Orientation orient)
     {
         posX = x;
@@ -58,7 +77,7 @@ public class Position
     }
     
     /**
-     * This method turn the robot to left or right.
+     * This method turns the robot to left or right.
      * E.g. left
      * E.g. right
      *
@@ -71,7 +90,7 @@ public class Position
         if (posX != -1 && posY != -1 && orientation != null)
         {
             int number = (orientation.getValue() + value) % Orientation.values().length;
-            orientation = orientation.getOrientation(number);
+            orientation = orientation.getOrientation(number == 0 ? Orientation.values().length : number);
         }
     }
     
@@ -91,31 +110,63 @@ public class Position
         return strReport;
     }
     
+    /**
+     * This method gets the current x coordinate.
+     * 
+     * @return The x coordinate
+     *
+     */
     public int getPosX()
     {
         return posX;
     }
     
+    /**
+     * This method gets the current y coordinate.
+     * 
+     * @return The y coordinate
+     *
+     */
     public int getPosY()
     {
         return posY;
     }
     
+    /**
+     * This method sets the x coordinate.
+     * 
+     * @param value The value of the x coordinate
+     */
     public void setPosX(int value)
     {
         posX = value;
     }
     
+    /**
+     * This method sets the y coordinate.
+     * 
+     * @param value The value of the y coordinate
+     */
     public void setPosY(int value)
     {
         posY = value;
     }
     
+    /**
+     * This method gets the orientation of the position.
+     * 
+     * @return The orientation enum
+     */
     public Orientation getOrientation()
     {
         return orientation;
     }
     
+    /**
+     * This method sets the orientation of the position.
+     * 
+     * @param orient The orientation enum
+     */
     public void setOrientation(Orientation orient)
     {
         orientation = orient;

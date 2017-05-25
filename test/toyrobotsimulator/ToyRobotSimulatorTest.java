@@ -104,7 +104,7 @@ public class ToyRobotSimulatorTest
     {
         System.out.println("whenArgsAreNotNumbersForPlaceThenThrowException");
         
-        robot.execute("place 1, b, NORTH");  // Valid commands: place, move, left, right, report
+        robot.execute("place   1 , b, NORTH");  // Valid commands: place, move, left, right, report
     }
     
     /**
